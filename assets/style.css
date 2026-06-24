@@ -1,0 +1,118 @@
+html[data-theme="white"]{--bg:#fff;--fg:#333;--muted:#999;--side-bg:#fafafa;--side-fg:#364149;--side-head:#3a4553;--line:#e6e6e6;--accent:#008cff;--side-active:#008cff;--side-active-bg:#f0f7ff;}
+html[data-theme="sepia"]{--bg:#f3eacb;--fg:#5b4636;--muted:#9a8366;--side-bg:#ece2c4;--side-fg:#5b4636;--side-head:#5b4636;--line:#dccfa6;--accent:#9b6a3f;--side-active:#9b6a3f;--side-active-bg:#e3d7b1;}
+html[data-theme="night"]{--bg:#1c1f24;--fg:#bcc0c6;--muted:#777c85;--side-bg:#22262b;--side-fg:#aeb4bf;--side-head:#cdd2da;--line:#2c3037;--accent:#3ea3ff;--side-active:#3ea3ff;--side-active-bg:#283039;}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;transition:background .2s,color .2s}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.sidebar{position:fixed;top:0;left:0;width:300px;height:100vh;overflow-y:auto;
+  background:var(--side-bg);border-right:1px solid var(--line);transition:transform .25s ease;z-index:30}
+.sb-inner{padding:0 0 3rem}
+.sb-home{display:block;font-weight:700;color:var(--side-head);padding:1rem 1.4rem;
+  border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--side-bg)}
+/* ===== 全局搜索 ===== */
+.sb-search{padding:.7rem 1rem .4rem}
+.ss-field{position:relative}
+.ss-field input{width:100%;box-sizing:border-box;padding:.5rem 2rem .5rem .7rem;
+  border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);
+  font-size:.9rem;outline:none;-webkit-appearance:none}
+.ss-field input::-webkit-search-cancel-button{display:none}
+.ss-field input:focus{border-color:var(--accent)}
+.ss-clear{display:none;position:absolute;right:.4rem;top:50%;transform:translateY(-50%);
+  border:none;background:none;color:var(--muted);font-size:1.2rem;line-height:1;cursor:pointer;
+  width:1.4rem;height:1.4rem;border-radius:50%}
+.ss-clear:hover{color:var(--fg);background:var(--side-active-bg)}
+.ss-results{display:none;margin-top:.5rem;max-height:62vh;overflow-y:auto}
+.ss-results.open{display:block}
+.ss-msg,.ss-count{color:var(--muted);font-size:.8rem;padding:.3rem .2rem}
+.ss-count{border-bottom:1px solid var(--line);margin-bottom:.3rem}
+.ss-card{display:block;padding:.5rem .6rem;border-radius:8px;margin-bottom:.25rem;color:var(--side-fg)}
+.ss-card:hover{background:var(--side-active-bg);text-decoration:none}
+.ss-card.ss-newch{margin-top:.45rem}
+.ss-ttl{font-size:.8rem;font-weight:700;color:var(--side-head);margin-bottom:.2rem}
+.ss-snip{font-size:.82rem;line-height:1.55;color:var(--side-fg);opacity:.92}
+.ss-snip mark,.page-inner mark{background:#ffe58a;color:inherit;border-radius:2px;padding:0 .05em}
+html[data-theme="night"] .ss-snip mark,html[data-theme="night"] .page-inner mark{background:#7a5d00;color:#fff}
+.page-inner p.ss-hit{background:var(--side-active-bg);border-radius:6px;
+  box-shadow:0 0 0 .55rem var(--side-active-bg);transition:background .4s,box-shadow .4s}
+
+.sb-list{list-style:none;margin:0;padding:.5rem 0}
+.sb-part-link{display:block;font-weight:700;color:var(--side-head);padding:.6rem 1.4rem;margin-top:.4rem}
+.sb-ch a{display:block;color:var(--side-fg);padding:.42rem 1.4rem .42rem 2rem;font-size:.95rem}
+.sb-ch a:hover,.sb-part-link:hover{background:var(--side-active-bg);text-decoration:none}
+.sb-ch.active a,.sb-part-link.active{background:var(--side-active-bg);color:var(--side-active);
+  box-shadow:inset 3px 0 0 var(--side-active)}
+.page{margin-left:300px;transition:margin .25s ease;min-height:100vh}
+html.sidebar-closed .sidebar{transform:translateX(-100%)}
+html.sidebar-closed .page{margin-left:0}
+.toolbar{position:sticky;top:0;display:flex;align-items:center;gap:.3rem;
+  padding:.55rem .8rem;background:var(--bg);z-index:20}
+.tb-btn{cursor:pointer;background:none;border:none;color:var(--muted);font-size:1.25rem;
+  width:2.3rem;height:2.3rem;border-radius:6px;line-height:1;
+  display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
+.tb-btn:hover{background:var(--side-active-bg);color:var(--fg)}
+.tb-font{position:relative}
+.font-panel{position:absolute;top:2.6rem;left:0;background:var(--side-bg);border:1px solid var(--line);
+  border-radius:10px;padding:.7rem .9rem;box-shadow:0 6px 24px rgba(0,0,0,.18);display:none;min-width:210px;z-index:40}
+.font-panel.open{display:block}
+.fp-row{display:flex;align-items:center;gap:.4rem;margin:.35rem 0}
+.fp-row>span{width:2.4em;color:var(--muted);font-size:.85rem}
+.fp-btn{cursor:pointer;border:1px solid var(--line);background:var(--bg);color:var(--fg);
+  border-radius:6px;padding:.3rem .6rem;font-size:.85rem;flex:1}
+.fp-btn:hover{border-color:var(--accent)}
+.theme-w{background:#fff;color:#333}.theme-s{background:#f3eacb;color:#5b4636}.theme-n{background:#1c1f24;color:#ccc}
+.page-inner{max-width:740px;margin:0 auto;padding:1.5rem 2.4rem 5rem;
+  font-family:"Noto Serif SC",Georgia,"Songti SC",serif;font-size:18px;line-height:1.9}
+html[data-font="sans"] .page-inner{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}
+.page-inner h1{font-size:1.7rem;font-weight:700;margin:.4em 0 1.2em}
+.page-inner p{margin:1.05em 0}
+.chapter .page-inner p{text-indent:2em}
+.page-inner hr{border:none;border-top:1px solid var(--line);margin:1.8em 18%}
+.preface-box p:first-child{font-weight:700;font-size:1.15em}
+.byline{color:var(--muted);margin:-.6em 0 1.5em}
+.nav-arrow{position:fixed;top:50%;transform:translateY(-50%);width:2.6rem;height:3.4rem;
+  display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:2rem;
+  background:none;border:none;cursor:pointer;text-decoration:none;z-index:15}
+.nav-arrow:hover{color:var(--accent);text-decoration:none}
+.nav-arrow.prev{left:300px}.nav-arrow.next{right:0}
+html.sidebar-closed .nav-arrow.prev{left:0}
+.nav-arrow.disabled{opacity:0;pointer-events:none}
+@media(max-width:880px){
+  .page{margin-left:0}
+  .sidebar{width:82vw;max-width:300px;transform:translateX(-100%);box-shadow:0 0 30px rgba(0,0,0,.3)}
+  html:not(.sidebar-closed) .sidebar{transform:translateX(0)}
+  .toolbar{z-index:40}            /* 工具栏(含☰)层级高于侧栏,保证手机上始终点得到 */
+  /* 手机端:两侧翻页箭头改成底部角落小圆钮,不再遮挡正文 */
+  .nav-arrow{top:auto;bottom:.8rem;transform:none;width:2.5rem;height:2.5rem;border-radius:50%;
+    background:var(--side-bg);box-shadow:0 2px 8px rgba(0,0,0,.25);opacity:.9;font-size:1.5rem}
+  .nav-arrow.prev{left:.6rem}
+  .nav-arrow.next{right:.6rem}
+  .page-inner{padding:1.2rem 1.2rem 5rem}
+}
+/* ===== 书库首页 / 返回链接 ===== */
+.sb-lib{display:block;color:var(--muted);padding:.7rem 1.4rem;font-size:.85rem;
+  border-bottom:1px solid var(--line);background:var(--side-bg)}
+.sb-lib:hover{color:var(--accent);text-decoration:none;background:var(--side-active-bg)}
+body.library{background:var(--bg)}
+.lib-toolbar{position:sticky;top:0;display:flex;justify-content:flex-end;align-items:center;
+  padding:.55rem .8rem;background:var(--bg);z-index:20}
+.lib-wrap{max-width:880px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+.lib-head{text-align:center;margin-bottom:2.6rem}
+.lib-head h1{font-family:"Noto Serif SC",Georgia,"Songti SC",serif;font-size:2rem;margin:.2em 0 .4em}
+.lib-head p{color:var(--muted);margin:0;font-size:1rem}
+.lib-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.lib-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;
+  padding:1.5rem 1.6rem;color:var(--fg);background:var(--side-bg);transition:transform .15s,box-shadow .15s,border-color .15s}
+.lib-card:hover{text-decoration:none;transform:translateY(-3px);border-color:var(--accent);
+  box-shadow:0 8px 26px rgba(0,0,0,.12)}
+.lib-card .lc-ord{font-size:.78rem;color:var(--accent);font-weight:700;letter-spacing:.08em}
+.lib-card h2{font-family:"Noto Serif SC",Georgia,"Songti SC",serif;font-size:1.4rem;margin:.4rem 0 .2rem;color:var(--side-head)}
+.lib-card .lc-meta{color:var(--muted);font-size:.85rem;margin-bottom:.8rem}
+.lib-card .lc-desc{font-size:.92rem;line-height:1.75;flex:1;margin:0 0 1.2rem}
+.lib-card .lc-go{align-self:flex-start;border:1px solid var(--accent);color:var(--accent);
+  border-radius:8px;padding:.4rem 1.1rem;font-size:.9rem}
+.lib-card:hover .lc-go{background:var(--accent);color:#fff}
+.lib-foot{text-align:center;color:var(--muted);font-size:.8rem;margin-top:3rem;line-height:1.8}
+.lib-foot a{color:var(--muted);text-decoration:underline}
