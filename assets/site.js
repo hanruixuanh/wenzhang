@@ -1,3 +1,20 @@
+/* 访问密码门 —— 输入 2003 才能阅读。
+   注意：这是纯前端校验，只能挡住普通访客，无法做到真正加密。 */
+(function(){
+  var KEY="ppm_unlocked", PW="2003";
+  try{ if(localStorage.getItem(KEY)==="1") return; }catch(e){}
+  document.documentElement.style.visibility="hidden";
+  while(true){
+    var v=window.prompt("请输入访问密码：");
+    if(v===PW){
+      try{ localStorage.setItem(KEY,"1"); }catch(e){}
+      document.documentElement.style.visibility="";
+      break;
+    }
+    window.alert("密码错误，请重试。");
+  }
+})();
+
 (function(){
   var root=document.documentElement, LS=window.localStorage;
   function get(k,d){var v=LS.getItem(k);return v===null?d:v;}
